@@ -19,7 +19,7 @@ class Snippet(models.Model):
     code = models.TextField()
     linenos = models.BooleanField(default=False)
     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
-    style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
+    style = models.CharField(choices=STYLE_CHOICES, default='inkpot', max_length=100)
     
     def save(self, *args, **kwargs): 
         lexer = get_lexer_by_name(self.language)
