@@ -1,6 +1,6 @@
 import json
-from django.http import JsonResponse
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
 
 from rest_framework.response import Response
 
