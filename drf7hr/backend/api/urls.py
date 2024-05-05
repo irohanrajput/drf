@@ -1,7 +1,9 @@
 from django.urls import path
 
-from .views import api_home
+from . import views
+# from .views import api_home
+
 
 urlpatterns = [
-    path('', api_home)
+    path('', views.api_home) # localhost:8000/api/
 ]
