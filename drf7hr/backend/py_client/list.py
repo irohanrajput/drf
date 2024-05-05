@@ -8,7 +8,10 @@ data = {
     "price": 1100.00
 }
 
-response = requests.post(endpoint, json=data)
+response = requests.get(endpoint)
+# response = requests.post(endpoint, json=data)
+
+#now the same endpoint will handle both the requests
 
 
 print(response.json())
