@@ -16,4 +16,4 @@ if product_id:
 
 r = requests.delete(endpoint)
 
-print(r.status_code, r.json())
+print(r.status_code)

@@ -30,3 +30,8 @@
 6. queryset in create method is not neccesarily neccesary, 
 
 >> the createapiVIEW is still working  when we remove it, but it is for other purposes i.e. post req without using generics etc
+
+
+7. authentication and permission
+
+>> we declared the "permission_class' to be "IsAuthenticated". and now, to handle the permissions, we need to setup an authentication system. and that's where. "from rest_framework import authentication" comes in.
