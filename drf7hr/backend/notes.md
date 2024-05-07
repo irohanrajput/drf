@@ -25,3 +25,8 @@
 5. Returning the Response:
 
 >>Finally, the serialized data is returned as an HTTP response to the client.
+
+
+6. queryset in create method is not neccesarily neccesary, 
+
+>> the createapiVIEW is still working  when we remove it, but it is for other purposes i.e. post req without using generics etc
