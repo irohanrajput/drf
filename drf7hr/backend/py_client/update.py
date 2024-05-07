@@ -1,5 +1,5 @@
 import requests
-pk = 10
+pk = 4
 endpoint = f"http://localhost:8000/api/products/{pk}/update"
 
 data = {
