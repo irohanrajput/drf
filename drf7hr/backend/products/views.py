@@ -7,7 +7,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()  #notes:6
     serializer_class = ProductSerializer
     authentication_classes = [authentication.SessionAuthentication] #notes:7
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.DjangoModelPermissions]
     
     def perform_create(self, serializer):
         content = serializer.validated_data.get("content") or None
@@ -24,7 +24,8 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     
 class ProductUpdateAPIView(generics.UpdateAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer 
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.DjangoModelPermissions] 
 
     def perform_update(self, serializer): #for more custom things
         instance = serializer.save()
