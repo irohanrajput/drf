@@ -1,19 +1,14 @@
-from rest_framework import generics, mixins, permissions, authentication
+from rest_framework import generics, mixins, permissions
 
 from .models import Product
 from .serializers import ProductSerializer
-from .permissions import IsStaffEditorPermisson
-from api.authentication import TokenAuthentication
+from api.permissions import IsStaffEditorPermission
+from api.mixins import StaffEditorPermissionMixin
 
 
-class ProductListCreateAPIView(generics.ListCreateAPIView):
+class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAPIView):
     queryset = Product.objects.all()  # notes:6
     serializer_class = ProductSerializer
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        TokenAuthentication,
-    ]  # notes:7
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
 
 
     def perform_create(self, serializer):
@@ -23,18 +18,16 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
         serializer.save(content=content)
 
 
-class ProductDetailAPIView(generics.RetrieveAPIView):
+class ProductDetailAPIView(StaffEditorPermissionMixin, generics.RetrieveAPIView):
     queryset = Product.objects.all()  # notes:3,4,5
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
     # lookup_field = "pk"  this is the default field
 
 
-class ProductUpdateAPIView(generics.UpdateAPIView):
+class ProductUpdateAPIView(StaffEditorPermissionMixin, generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
 
     def perform_update(self, serializer):  # for more custom things
@@ -47,10 +40,10 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
             instance.save()
 
 
-class ProductDeleteAPIView(generics.DestroyAPIView):
+class ProductDeleteAPIView(StaffEditorPermissionMixin, generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
     #this permission_class is used to override the default permission classes if required.
 
 
