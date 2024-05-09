@@ -15,6 +15,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     ]  # notes:7
     permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
 
+
     def perform_create(self, serializer):
         content = serializer.validated_data.get("content") or None
         if content is None:
@@ -33,7 +34,8 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
 class ProductUpdateAPIView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.DjangoModelPermissions]
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
+
 
     def perform_update(self, serializer):  # for more custom things
         instance = serializer.save()
@@ -48,6 +50,9 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
 class ProductDeleteAPIView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermisson]
+    #this permission_class is used to override the default permission classes if required.
+
 
     def perform_destroy(self, instance):
         return super().perform_destroy(instance)
