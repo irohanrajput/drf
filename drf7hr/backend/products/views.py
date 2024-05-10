@@ -1,14 +1,14 @@
 from rest_framework import generics, mixins, permissions, viewsets
 
 from .models import Product
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, newSerializer
 from api.permissions import IsStaffEditorPermission
 from api.mixins import StaffEditorPermissionMixin
 
 
 class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAPIView):
     queryset = Product.objects.all()  # notes:6
-    serializer_class = ProductSerializer
+    serializer_class = newSerializer
 
 
     def perform_create(self, serializer):

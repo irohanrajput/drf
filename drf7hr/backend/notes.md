@@ -35,3 +35,24 @@
 7. authentication and permission
 
 >> we declared the "permission_class' to be "IsAuthenticated". and now, to handle the permissions, we need to setup an authentication system. and that's where. "from rest_framework import authentication" comes in.
+
+
+8. hyperlinkIdentityFields
+
+>> The serializers.HyperlinkedIdentityField is used to represent hyperlinks to individual instances of a model.often used in conjunction with serializers.
+
+
+from rest_framework import serializers
+from .models import Product
+
+class ProductSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='product-detail',
+        lookup_field='pk'
+    )
+    
+    class Meta:
+        model = Product
+        fields = ['url', 'pk', 'title', 'description', 'price']
+        
+url is an instance of HyperlinkedIdentityField added to the serializer.
