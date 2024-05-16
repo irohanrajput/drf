@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.reverse import reverse
 
 from .models import Product
+from .validators import validate_title
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -13,6 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
         view_name='product-detail',
         lookup_field='pk'
     )
+    title = serializers.CharField(validators=[validate_title])
     class Meta:
         model = Product
         fields = [
@@ -26,6 +28,13 @@ class ProductSerializer(serializers.ModelSerializer):
             'sale_price',
             'my_discount',
         ]
+        
+        
+    # def validate_title(self, value):
+    #     qs = Product.objects.filter(title__iexact=value)
+    #     if qs:
+    #         raise serializers.ValidationError("This title already exists")
+    #     return value
         
     def get_detailsUrl(self, instance):
         print(instance)

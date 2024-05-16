@@ -9,6 +9,7 @@ from api.mixins import StaffEditorPermissionMixin
 class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAPIView):
     queryset = Product.objects.all()  # notes:6
     serializer_class = newSerializer
+    permission_classes = []
 
 
     def perform_create(self, serializer):
@@ -21,6 +22,7 @@ class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAP
 class ProductDetailAPIView(StaffEditorPermissionMixin, generics.RetrieveAPIView):
     queryset = Product.objects.all()  # notes:3,4,5
     serializer_class = ProductSerializer
+    permission_classes = []
     # lookup_field = "pk"  this is the default field
 
 

@@ -3,7 +3,7 @@ from getpass import getpass
 
 endpoint_token = "http://localhost:8000/api/auth"
 
-username = "sastauser"
+username = "sasta_user"
 password = None
 
 
