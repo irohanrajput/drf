@@ -9,7 +9,6 @@ from api.mixins import StaffEditorPermissionMixin
 class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAPIView):
     queryset = Product.objects.all()  # notes:6
     serializer_class = newSerializer
-    permission_classes = []
 
 
     def perform_create(self, serializer):
@@ -22,14 +21,12 @@ class ProductListCreateAPIView(StaffEditorPermissionMixin, generics.ListCreateAP
 class ProductDetailAPIView(StaffEditorPermissionMixin, generics.RetrieveAPIView):
     queryset = Product.objects.all()  # notes:3,4,5
     serializer_class = ProductSerializer
-    permission_classes = []
     # lookup_field = "pk"  this is the default field
 
 
 class ProductUpdateAPIView(StaffEditorPermissionMixin, generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
 
     def perform_update(self, serializer):  # for more custom things
@@ -45,7 +42,6 @@ class ProductUpdateAPIView(StaffEditorPermissionMixin, generics.UpdateAPIView):
 class ProductDeleteAPIView(StaffEditorPermissionMixin, generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
     #this permission_class is used to override the default permission classes if required.
 
 
